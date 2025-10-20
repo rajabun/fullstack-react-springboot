@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple HTML using React 2</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="/react-lib/react.development.js"></script>
+    <script src="/react-lib/react-dom.development.js "></script>
+    <script>
+      //Generate a random number between 1 and 100
+      const nestedElement = React.createElement("div", { id: "parent" }, [
+        React.createElement("div", { id: "child1" }, [
+          React.createElement(
+            "h1",
+            { style: { color: "blue" } },
+            "Hi, I'm Bob the Builder!"
+          ),
+          React.createElement("h2", {}, "I can fix it!"),
+        ]),
+        React.createElement("div", { id: "child2" }, [
+          React.createElement(
+            "h1",
+            { style: { color: "orange" } },
+            "Hi, I'm Dora the Explorer"
+          ),
+          React.createElement("h2", {}, "Let's go exploring"),
+        ]),
+      ]);
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render([numberElement, resultElement]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple HTML using React</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="/react-lib/react.development.js"></script>
+    <script src="/react-lib/react-dom.development.js "></script>
+    <script>
+      //Generate a random number between 1 and 100
+      const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+      /*
+      Old way using native javascript
+
+      // Create a new element to display a random number
+      const numberElement = document.createElement("h1");
+      numberElement.innerHTML = `Generated number: ${randomNumber}`;
+
+      const resultElement = document.createElement("h2");
+      if (randomNumber % 2 == 0) {
+        resultElement.innerHTML = "The number is even!";
+      } else {
+        resultElement.innerHTML = "The number is odd !";
+      }
+
+      //Get the root element and append the generated elements (actual DOM)
+      const root = document.getElementById("root");
+      root.appendChild(numberElement);
+      root.appendChild(resultElement);
+        */
+
+      const numberElement = React.createElement(
+        "h1",
+        { id: "childDiv" },
+        `Generated number: ${randomNumber}`
+      );
+
+      const resultElement = React.createElement(
+        "h2",
+        { style: { color: "blue" } },
+        randomNumber % 2 == 0 ? "The number is even!" : "The number is odd !"
+      );
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render([numberElement, resultElement]);
+
+      /*
+      other way to create root without id is initialized first after body tag (div tag is removed)
+      css styling is not implemented because div tag with id root is removed
+      this way is not recommended
+
+      const root = ReactDOM.createRoot(document.body);
+      root.render(
+        React.createElement("div", null, [numberElement, resultElement])
+      );
+*/
+    </script>
+  </body>
+</html>
