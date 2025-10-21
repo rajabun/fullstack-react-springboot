@@ -15,24 +15,20 @@
     <script src="./react-lib/react.development.js"></script>
     <script src="./react-lib/react-dom.development.js"></script>
     <script>
-      const nestedElement = React.createElement("div", { id: "parent" }, [
-        React.createElement("div", { id: "child1" }, [
-          React.createElement(
-            "h1",
-            { style: { color: "blue" } },
-            "Hi, I'm Bob the Builder!"
-          ),
-          React.createElement("h2", {}, "I can fix it!"),
-        ]),
-        React.createElement("div", { id: "child2" }, [
-          React.createElement(
-            "h1",
-            { style: { color: "orange" } },
-            "Hi, I'm Dora the Explorer"
-          ),
-          React.createElement("h2", {}, "Let's go exploring"),
-        ]),
-      ]);
+      const nestedElement = (
+        <div id="root">
+          <div id="parent">
+            <div id="child1">
+              <h1 style={{ color: "blue" }}>Hi, I'm Bob the Builder</h1>
+              <h2>I can fix it</h2>
+            </div>
+            <div id="child2">
+              <h1 style={{ color: "orange" }}>Hi, I'm Dora the Explorer</h1>
+              <h2>Let's go exploring</h2>
+            </div>
+          </div>
+        </div>
+      );
 
       const root = ReactDOM.createRoot(document.getElementById("root"));
       root.render(nestedElement);
