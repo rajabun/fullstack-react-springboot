@@ -8,11 +8,10 @@ export default function Footer() {
   return (
     <>
       <h1
-        style={
-          isActive
-            ? { textAlign: "center", color: "#5b21b6" }
-            : { textAlign: "center", color: "#333" }
-        }
+        style={{
+          textAlign: "center",
+          color: isActive ? "#5b21b6" : "#333",
+        }}
       >
         Demo of Global CSS Scope from Footer
       </h1>
