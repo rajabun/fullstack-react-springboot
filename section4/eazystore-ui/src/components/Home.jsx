@@ -1,6 +1,7 @@
 import products from "../data/products";
 import PageHeading from "./PageHeading";
 import ProductListings from "./ProductListings";
+import EazyButton from "./EazyButton";
 
 export default function Home() {
   const isActive = Math.random() > 0.5;
@@ -18,8 +19,9 @@ export default function Home() {
       >
         Demo of Global CSS Scope from Home
       </h1>
-      {/* <h1 style={h1Styling}>Demo of Global CSS Scope from Home</h1> */}
-      {/* <h1 className="my-heading">Demo of Global CSS Scope from Home</h1> */}
+      <EazyButton>Home</EazyButton>
+      {/* <h1 style={h1Styling}>Demo of Global CSS Scope from Home with CSS Inline Styles</h1> */}
+      {/* <h1 className="my-heading">Demo of Global CSS Scope from Home with common CSS</h1> */}
       <div className="home-container">
         <PageHeading title="Explore Eazy Stickers!">
           Add a touch of creativity to your space with our wide range of fun and
