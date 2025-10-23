@@ -11,7 +11,7 @@ const H1 = styled.h1`
 `;
 
 export default function Footer() {
-  const isActive = Math.random() > 0.5;
+  // const isActive = Math.random() > 0.5;
 
   return (
     <>

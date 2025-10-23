@@ -17,6 +17,11 @@ const EazyButton = styled.button`
   &focus {
     outline: 2px solid white;
   }
+
+  @media (max-width: 300px) {
+    background-color: red;
+    font-size: 12px;
+  }
 `;
 
 export default EazyButton;
