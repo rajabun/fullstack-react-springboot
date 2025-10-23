@@ -5,6 +5,7 @@ import Footer from "./components/footer/Footer";
 import Home from "./components/Home";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App() {
   return (
