@@ -12,16 +12,17 @@ export default function Home() {
 
   return (
     <>
-      <h1
+      {/* <h1
         className={`my-heading ${
           isActive ? "primary-color" : "secondary-color"
         }`}
       >
         Demo of Global CSS Scope from Home
       </h1>
-      <EazyButton>Home</EazyButton>
+      <EazyButton>Home</EazyButton> */}
       {/* <h1 style={h1Styling}>Demo of Global CSS Scope from Home with CSS Inline Styles</h1> */}
       {/* <h1 className="my-heading">Demo of Global CSS Scope from Home with common CSS</h1> */}
+
       <div className="home-container">
         <PageHeading title="Explore Eazy Stickers!">
           Add a touch of creativity to your space with our wide range of fun and

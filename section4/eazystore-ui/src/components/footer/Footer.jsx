@@ -34,8 +34,9 @@ export default function Footer() {
         Demo of Global CSS Scope from Footer with CSS Modules
       </h1> */}
 
-      <H1>Demo of Styled Components from Footer</H1>
-      <EazyButton $primary>Submit</EazyButton>
+      {/* <H1>Demo of CSS using Styled Components from Footer</H1>
+      <EazyButton $primary>Submit</EazyButton> */}
+
       <footer className={styles.footer}>
         Built with
         <FontAwesomeIcon
