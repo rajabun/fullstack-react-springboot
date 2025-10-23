@@ -2,9 +2,10 @@ import products from "../data/products";
 import PageHeading from "./PageHeading";
 import ProductListings from "./ProductListings";
 import EazyButton from "./EazyButton";
+import BootstrapButton from "./BootstrapButton";
 
 export default function Home() {
-  const isActive = Math.random() > 0.5;
+  // const isActive = Math.random() > 0.5;
   // const h1Styling = {
   //   textAlign: "center",
   //   color: isActive ? "black" : "red",
@@ -24,6 +25,15 @@ export default function Home() {
       {/* <h1 className="my-heading">Demo of Global CSS Scope from Home with common CSS</h1> */}
 
       <div className="home-container">
+        {/* <button className="btn btn-primary">Submit</button> */}
+        <div className="container col-6">
+          <BootstrapButton text="Submit" type="primary" />
+          <BootstrapButton text="Save" type="secondary" />
+          <BootstrapButton text="Okay" type="success" />
+          <BootstrapButton text="Cancel" type="danger" />
+          <BootstrapButton text="Delete" type="warning" />
+          <BootstrapButton text="Link" type="link" />
+        </div>
         <PageHeading title="Explore Eazy Stickers!">
           Add a touch of creativity to your space with our wide range of fun and
           unique stickers. Perfect for any occasion!
