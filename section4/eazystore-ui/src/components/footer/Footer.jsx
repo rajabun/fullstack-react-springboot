@@ -35,7 +35,7 @@ export default function Footer() {
       </h1> */}
 
       <H1>Demo of Styled Components from Footer</H1>
-      <EazyButton>Submit</EazyButton>
+      <EazyButton $primary>Submit</EazyButton>
       <footer className={styles.footer}>
         Built with
         <FontAwesomeIcon
