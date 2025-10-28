@@ -1,5 +1,6 @@
 package com.eazybytes.eazystore.controller;
 
+import com.eazybytes.eazystore.dto.ProductDto;
 import com.eazybytes.eazystore.entity.Product;
 import com.eazybytes.eazystore.repository.ProductRepository;
 import com.eazybytes.eazystore.service.IProductService;
@@ -30,13 +31,13 @@ public class ProductController {
     */
 
     @GetMapping
-    public List<Product> getProducts() {
+    public List<ProductDto> getProducts() {
         // In Memory Database: H2 DB (don't need to install any software, testing purposes only in dev environment)
         // Database Example: MySQL, Oracle, Postgres
 
 //        List<Product> productList = productRepository.findAll(); //using repository interface in section 121-122
 
-        List<Product> productList = iProductService.getProducts();
+        List<ProductDto> productList = iProductService.getProducts();
         return productList;
     }
 }
