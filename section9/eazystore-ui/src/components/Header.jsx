@@ -12,7 +12,16 @@ export default function Header() {
   const [theme, setTheme] = useState("light");
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "light" ? "dark" : "light";
+
+      if (newTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      return newTheme;
+    });
   };
 
   const navLinkClass =
