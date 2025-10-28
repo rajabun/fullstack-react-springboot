@@ -36,6 +36,7 @@ public class ProductController {
 
 //        List<Product> productList = productRepository.findAll(); //using repository interface in section 121-122
 
+        System.out.println("Hello Products API");
         List<ProductDto> productList = iProductService.getProducts();
         return productList;
     }
