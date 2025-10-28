@@ -11,5 +11,7 @@ public class ProductController {
     @GetMapping
     public String getProducts() {
         return "Here are your products";
+        // In Memory Database: H2 DB (don't need to install any software, testing purposes only in dev environment)
+        // Database Example: MySQL, Oracle, Postgres
     }
 }
