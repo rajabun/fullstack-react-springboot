@@ -9,6 +9,12 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  /* useEffect lets you sync a component with an external system, ex: REST API
+    1. useEffect(() => {...}) will runs on every render
+    2. useEffect(() => {...}, []) will runs only once when initial mounting is happening
+    3. useEffect(() => {...}, [count]) will runs when count changes
+  */
+
   //Run once when the component mounts
   //Mounting is the process of creating and adding the component into DOM
   useEffect(() => {
