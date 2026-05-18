@@ -3,6 +3,7 @@ import MyHeader from "./components/Header";
 import Footer from "./components/footer/Footer";
 import Home from "./components/Home";
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
     // <React.Fragment>
     <>
       <MyHeader />
-      <Home />
+      <Outlet />
       <Footer />
     </>
     // </React.Fragment>
