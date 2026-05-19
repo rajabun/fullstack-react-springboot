@@ -2,6 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
+import { ToastContainer, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Home from "./components/Home.jsx";
 import {
   createBrowserRouter,
@@ -71,5 +74,15 @@ createRoot(document.getElementById("root")).render(
   //StrictMode is used to render component twice to find common bugs. Used for development only
   <StrictMode>
     <RouterProvider router={appRouter} />
+    <ToastContainer
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      draggable
+      pauseOnHover
+      theme={localStorage.getItem("theme") === "dark" ? "dark" : "light"}
+      transition={Bounce}
+    />
   </StrictMode>,
 );

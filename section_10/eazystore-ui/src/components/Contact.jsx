@@ -4,6 +4,8 @@ import { Form } from "react-router-dom";
 import apiClient from "../api/apiClient";
 import { useActionData, useNavigation } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { toast } from "react-toastify";
+//import { redirect } from "react-router-dom";
 
 export default function Contact() {
   const actionData = useActionData();
@@ -14,6 +16,7 @@ export default function Contact() {
   useEffect(() => {
     if (actionData?.success) {
       formRef.current?.reset();
+      toast.success("Your message has been submitted successfully!");
     }
   }, [actionData]);
 
@@ -135,6 +138,7 @@ export async function contactAction({ request, params }) {
   try {
     await apiClient.post("/contacts", contactData);
     return { success: true };
+    //return redirect("/home"); to redirect user to other page
   } catch (error) {
     throw new Response(
       error.message || "Failed to submit your message. Please try again.",
