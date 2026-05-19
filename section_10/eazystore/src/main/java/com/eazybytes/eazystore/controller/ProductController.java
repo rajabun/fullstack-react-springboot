@@ -30,13 +30,14 @@ public class ProductController {
     */
 
     @GetMapping
-    public List<ProductDto> getProducts() { //DTO Pattern
+    public List<ProductDto> getProducts() throws InterruptedException { //DTO Pattern
         // In Memory Database: H2 DB (don't need to install any software, testing purposes only in dev environment)
         // Database Example: MySQL, Oracle, Postgres
 
 //        List<Product> productList = productRepository.findAll(); //using repository interface in section 121-122
 
         System.out.println("Hello Products API");
+        Thread.sleep(1000);
         List<ProductDto> productList = iProductService.getProducts();
         return productList;
     }

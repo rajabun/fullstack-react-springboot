@@ -3,9 +3,14 @@ import ProductCard from "./ProductCard";
 import SearchBox from "./SearchBox";
 import Dropdown from "./Dropdown";
 
+//useLoaderData can be inserted in this jsx file instead from Home.jsx
+//import { useLoaderData } from "react-router-dom";
+
 const sortList = ["Popularity", "Price Low to High", "Price High to Low"];
 
 export default function ProductListings({ products }) {
+  //export default function ProductListings() {
+  //const products = useLoaderData;
   const [searchText, setSearchText] = useState("");
   const [selectedSort, setSelectedSort] = useState("Popularity");
 
@@ -17,7 +22,7 @@ export default function ProductListings({ products }) {
     let filteredProducts = products.filter(
       (product) =>
         product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchText.toLowerCase())
+        product.description.toLowerCase().includes(searchText.toLowerCase()),
     );
 
     return filteredProducts.slice().sort((a, b) => {
