@@ -1,9 +1,19 @@
 import React from "react";
 import PageTitle from "./PageTitle";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import emptyCartImage from "../assets/util/emptycart.png";
 
 export default function Cart() {
+  const navigation = useNavigate();
+
+  const handleClick = () => {
+    console.log("Navigating Programmatically");
+    navigation("/home", { state: { username: "jabun" } });
+    //navigation("/home", { replace: true }); replace is for override browser history replacing /home from /cart
+    //navigation(-1); similar if we click back button on browser
+  };
+
   return (
     <div className="min-h-[852px] py-12 bg-normalbg dark:bg-darkbg font-primary">
       <div className="max-w-4xl mx-auto px-4">
@@ -17,12 +27,12 @@ export default function Cart() {
             alt="Empty Cart"
             className="max-w-[300px] mx-auto mb-6 dark:bg-light dark:rounded-md"
           />
-          <Link
-            to="/"
+          <button
+            onClick={handleClick}
             className="py-2 px-4 bg-primary dark:bg-light text-white dark:text-black text-xl font-semibold rounded-sm flex justify-center items-center hover:bg-dark dark:hover:bg-lighter transition"
           >
             Back to Products
-          </Link>
+          </button>
         </div>
       </div>
     </div>

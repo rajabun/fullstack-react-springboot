@@ -67,6 +67,7 @@ const appRouter = createBrowserRouter([
 */
 
 createRoot(document.getElementById("root")).render(
+  //StrictMode is used to render component twice to find common bugs. Used for development only
   <StrictMode>
     <RouterProvider router={appRouter} />
   </StrictMode>,
