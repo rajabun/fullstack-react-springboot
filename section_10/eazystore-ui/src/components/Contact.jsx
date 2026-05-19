@@ -1,8 +1,22 @@
 import React from "react";
 import PageTitle from "./PageTitle";
 import { Form } from "react-router-dom";
+import apiClient from "../api/apiClient";
+import { useActionData, useNavigation } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 export default function Contact() {
+  const actionData = useActionData();
+  const formRef = useRef(null);
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
+  useEffect(() => {
+    if (actionData?.success) {
+      formRef.current?.reset();
+    }
+  }, [actionData]);
+
   const labelStyle =
     "block text-lg font-semibold text-primary dark:text-light mb-2";
   const textFieldStyle =
@@ -18,7 +32,11 @@ export default function Contact() {
       </p>
 
       {/* Contact Form */}
-      <Form className="space-y-6 max-w-[768px] mx-auto">
+      <Form
+        ref={formRef}
+        method="POST"
+        className="space-y-6 max-w-[768px] mx-auto"
+      >
         {/* Name Field */}
         <div>
           <label htmlFor="name" className={labelStyle}>
@@ -92,12 +110,35 @@ export default function Contact() {
         <div className="text-center">
           <button
             type="submit"
+            disabled={isSubmitting}
             className="px-6 py-2 text-white dark:text-black text-xl rounded-md transition duration-200 bg-primary dark:bg-light hover:bg-dark dark:hover:bg-lighter"
           >
-            Submit
+            {isSubmitting ? "Submitting" : "Submit"}
           </button>
         </div>
       </Form>
     </div>
   );
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function contactAction({ request, params }) {
+  const data = await request.formData();
+
+  const contactData = {
+    name: data.get("name"),
+    email: data.get("email"),
+    mobileNumber: data.get("mobileNumber"),
+    message: data.get("message"),
+  };
+
+  try {
+    await apiClient.post("/contacts", contactData);
+    return { success: true };
+  } catch (error) {
+    throw new Response(
+      error.message || "Failed to submit your message. Please try again.",
+      { status: error.status || 500 },
+    );
+  }
 }
