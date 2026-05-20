@@ -38,6 +38,7 @@ public class ProductController {
 
         System.out.println("Hello Products API");
         List<ProductDto> productList = iProductService.getProducts();
+        System.out.print("Testing code changes dev tools");
         return productList;
     }
 }
