@@ -1,11 +1,14 @@
 package com.eazybytes.eazystore.controller;
 
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +52,7 @@ public class DummyController {
             return "Searching for user: " + actualName;
     }
 
-    /*
+    /* can't use default value in pathVariable
     @GetMapping("/user/{userId}")
     public String getUser(@PathVariable(name = "userId") String id) {
             System.out.print(id);
@@ -73,4 +76,28 @@ public class DummyController {
             return "Searching for user: " + actualId;
     }
 
+    @GetMapping("/headers")
+    public String readHeaders(
+        @RequestHeader(name = "User-Agent") String userAgent,
+        @RequestHeader(name = "User-Location", required = false) String userLocation) {
+            String actualHeaders = userAgent + ", " + userLocation;
+            System.out.print(actualHeaders);
+            return "Received headers with value: " + actualHeaders;
+    }
+
+    @GetMapping("/headers-map")
+    public String readHeadersWithMap(@RequestHeader Map<String,String> headers) {
+            String actualHeaders = headers.toString();
+            System.out.print(actualHeaders);
+            return "Received headers with value: " + actualHeaders;
+    }
+
+    @GetMapping("/headers-http")
+    public String readHeadersWithMap(@RequestHeader HttpHeaders headers) {
+    // public String readHeadersWithMap(@RequestHeader HttpServletRequest headers) {
+        // String location = headers.getHeader("User-Location");
+        List<String> location = headers.get("User-Location");
+        System.out.print(location);
+        return "Received headers with value: " + location;
+    }
 }
