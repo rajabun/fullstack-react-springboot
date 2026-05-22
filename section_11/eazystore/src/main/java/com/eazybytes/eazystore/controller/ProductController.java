@@ -3,6 +3,9 @@ package com.eazybytes.eazystore.controller;
 import com.eazybytes.eazystore.dto.ProductDto;
 import com.eazybytes.eazystore.service.IProductService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +33,7 @@ public class ProductController {
     */
 
     @GetMapping
-    public List<ProductDto> getProducts() throws InterruptedException { //DTO Pattern
+    public ResponseEntity<List<ProductDto>> getProducts() throws InterruptedException { //DTO Pattern
         // In Memory Database: H2 DB (don't need to install any software, testing purposes only in dev environment)
         // Database Example: MySQL, Oracle, Postgres
 
@@ -39,6 +42,6 @@ public class ProductController {
         System.out.println("Hello Products API");
         List<ProductDto> productList = iProductService.getProducts();
         System.out.print("Testing code changes dev tools");
-        return productList;
+        return ResponseEntity.ok(productList);
     }
 }
