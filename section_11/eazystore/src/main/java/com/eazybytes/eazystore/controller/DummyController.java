@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.RequestEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -99,5 +100,14 @@ public class DummyController {
         List<String> location = headers.get("User-Location");
         System.out.print(location);
         return "Received headers with value: " + location;
+    }
+
+    @PostMapping("/request-entity")
+    public String createUserWithEntity(RequestEntity<UserDto> requestEntity) {
+        HttpHeaders header = requestEntity.getHeaders(); //RequestHeader is better approach
+        UserDto userDto = requestEntity.getBody(); //RequestBody is better approach
+        String queryString = requestEntity.getUrl().getQuery(); //RequestParam is better approach
+        String path = requestEntity.getUrl().getPath(); //PathVariable is better approach
+        return "User created successfully";
     }
 }
