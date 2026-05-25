@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.RequestEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eazybytes.eazystore.dto.UserDto;
 
+import jakarta.validation.constraints.Size;
+
 @RestController
 @RequestMapping("api/v1/dummy")
+/*
+    @Validated is to perform validation for primitive data type like string
+    for custom data type we can use @Valid within the method after @RequestBody
+ */
+@Validated
 public class DummyController {
 
     @PostMapping("/create-user")
@@ -28,6 +36,7 @@ public class DummyController {
 
     @GetMapping("/search")
     public String searchUser(
+        @Size(min = 5, max = 30)
         @RequestParam(
         required = false,
         defaultValue = "Guest",

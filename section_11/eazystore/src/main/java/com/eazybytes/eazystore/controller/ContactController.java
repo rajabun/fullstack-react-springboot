@@ -2,6 +2,8 @@ package com.eazybytes.eazystore.controller;
 
 import com.eazybytes.eazystore.dto.ContactRequestDto;
 import com.eazybytes.eazystore.service.IContactService;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -19,7 +21,7 @@ public class ContactController {
     private final IContactService iContactService;
     
     @PostMapping
-    public ResponseEntity<String> saveContact(@RequestBody ContactRequestDto contactRequestDto) { //DTO Pattern
+    public ResponseEntity<String> saveContact(@Valid @RequestBody ContactRequestDto contactRequestDto) { //DTO Pattern
         iContactService.saveContact(contactRequestDto);
         // throw new RuntimeException("Oops something bad happened"); //testing global exception handler
         return ResponseEntity.status(HttpStatus.CREATED).body("Request processed successfully");
