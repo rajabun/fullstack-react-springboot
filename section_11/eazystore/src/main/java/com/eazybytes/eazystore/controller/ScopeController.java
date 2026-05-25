@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eazybytes.eazystore.scopes.RequestScopedBean;
 import com.eazybytes.eazystore.scopes.SessionScopedBean;
+import com.eazybytes.eazystore.scopes.ApplicationScopedBean;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class ScopeController {
     private final RequestScopedBean requestScopedBean;
     private final SessionScopedBean sessionScopedBean;
+    private final ApplicationScopedBean applicationScopedBean;
 
     @GetMapping("/request")
     public ResponseEntity<String> testRequestScope() {
@@ -36,4 +38,18 @@ public class ScopeController {
         return ResponseEntity.ok().body(sessionScopedBean.getUserName());
     }
 
+    @GetMapping("/application")
+    public ResponseEntity<Integer> testApplicationScope() {
+        applicationScopedBean.incrementVisitorCount();
+        return ResponseEntity.ok().body(applicationScopedBean.getVisitorCount());
+    }
+
+    /*
+    will retain the result for visitor count after initialized until the app is restarted or shutdown
+    the data can be shared across users, requests & multiple sessions
+    */
+    @GetMapping("/test-application")
+    public ResponseEntity<Integer> testApplicationScopeBrowse() {
+        return ResponseEntity.ok().body(applicationScopedBean.getVisitorCount());
+    }
 }
