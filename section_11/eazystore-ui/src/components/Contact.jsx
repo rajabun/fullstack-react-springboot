@@ -157,7 +157,9 @@ export async function contactAction({ request, params }) {
     //return redirect("/home"); to redirect user to other page
   } catch (error) {
     throw new Response(
-      error.message || "Failed to submit your message. Please try again.",
+      error.response?.data?.errorMessage ||
+        error.message ||
+        "Failed to submit your message. Please try again.",
       { status: error.status || 500 },
     );
   }
