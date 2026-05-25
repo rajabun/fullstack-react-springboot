@@ -3,7 +3,10 @@ package com.eazybytes.eazystore.controller;
 import com.eazybytes.eazystore.dto.ProductDto;
 import com.eazybytes.eazystore.service.IProductService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,9 +20,13 @@ import java.util.List;
 @RequestMapping("api/v1/products")
 //@CrossOrigin(origins = "http://localhost:5173") 1st way to fix cors error
 @RequiredArgsConstructor
+@Slf4j
 public class ProductController {
 
     private final IProductService iProductService;
+
+    //Using @Slf4j, this variable is not need to create manually
+    //private static final Logger log = LoggerFactory.getLogger(ProductController.class);
 
 //    private final ProductRepository productRepository; //using repository interface in section 121-122
 
@@ -42,6 +49,13 @@ public class ProductController {
         System.out.println("Hello Products API");
         List<ProductDto> productList = iProductService.getProducts();
         System.out.print("Testing code changes dev tools");
+
+        log.trace("Very detailed trace log");
+        log.debug("Debug message");
+        log.info("Informational Message, default value of log");
+        log.warn("Warning. Something might go wrong");
+        log.error("An error occurred. Needs immediate attention");
+
         return ResponseEntity.ok(productList);
     }
 }

@@ -18,12 +18,16 @@ import com.eazybytes.eazystore.dto.ErrorResponseDto;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class) //Handle all exceptions (Exception is Superclass)
     public ResponseEntity<ErrorResponseDto> handleGlobalException(Exception exception, WebRequest webRequest) {
+        log.error("An exception occurred due to: {}", exception.getMessage());
+
         HttpStatus errorCode = HttpStatus.INTERNAL_SERVER_ERROR;
         ErrorResponseDto errorResponseDto = new ErrorResponseDto(
             webRequest.getDescription(false),
@@ -37,6 +41,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class) //Handle all exceptions (Exception is Superclass)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException exception, WebRequest webRequest) {
+        log.error("An exception occurred due to: {}", exception.getMessage());
+
         Map<String, String> errors = new HashMap<>();
         List<FieldError> fieldErrorList = exception.getBindingResult().getFieldErrors();
         fieldErrorList.forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
@@ -45,6 +51,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class) //Handle all exceptions (Exception is Superclass)
     public ResponseEntity<Map<String, String>> handleConstraintViolationException(ConstraintViolationException exception, WebRequest webRequest) {
+        log.error("An exception occurred due to: {}", exception.getMessage());
+        
         Map<String, String> errors = new HashMap<>();
         Set<ConstraintViolation<?>> constraintViolationSet = exception.getConstraintViolations();
         constraintViolationSet.forEach(constraintViolation -> 
