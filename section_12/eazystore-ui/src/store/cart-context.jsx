@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 
 /*
 const initialCartContext = {
@@ -15,6 +15,9 @@ const initialCartContext = {
 //STEP 1
 // eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext();
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useCart = () => useContext(CartContext);
 
 //.Provider is for compatibility with older React version. not needed for React 19 and higher
 export const CartProvider = ({ children }) => {
