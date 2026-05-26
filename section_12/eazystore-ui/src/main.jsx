@@ -20,6 +20,7 @@ import ErrorPage from "./components/ErrorPage.jsx";
 import { productsLoader } from "./components/Home.jsx";
 import { contactAction } from "./components/Contact.jsx";
 import ProductDetail from "./components/ProductDetail.jsx";
+import { CartContext } from "./store/cart-context.jsx";
 
 //efficient writing for router
 const routeDefinitions = createRoutesFromElements(
@@ -36,46 +37,21 @@ const routeDefinitions = createRoutesFromElements(
 
 const appRouter = createBrowserRouter(routeDefinitions);
 
-/* old way
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "/home",
-        element: <Home />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
-    ],
-  },
-]);
-*/
+const initialCartContext = {
+  cart: [],
+  setCart: () => {},
+  addToCart: () => {},
+  removeFromCart: () => {},
+  totalQuantity: 0,
+};
 
 createRoot(document.getElementById("root")).render(
   //StrictMode is used to render component twice to find common bugs. Used for development only
+  //.Provider is for compatibility with older React version. not needed for React 19 and higher
   <StrictMode>
-    <RouterProvider router={appRouter} />
+    <CartContext.Provider value={initialCartContext}>
+      <RouterProvider router={appRouter} />
+    </CartContext.Provider>
     <ToastContainer
       position="top-center"
       autoClose={3000}
