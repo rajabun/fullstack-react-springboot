@@ -4,26 +4,54 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import lombok.RequiredArgsConstructor;
+
 import static org.springframework.security.config.Customizer.withDefaults;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity //optional because it's already on configuration, to improve readibility
+@RequiredArgsConstructor
 public class EazyStoreSecurityConfig {
+
+    private final List<String> publicPaths;
 
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests((requests) ->
-                requests.requestMatchers(HttpMethod.GET).permitAll()
-                        .requestMatchers("/api/v1/products/**", "/api/v1/contacts/**").permitAll()
-                        .requestMatchers("/api/v1/dummy/**").authenticated()
-                        .anyRequest().authenticated())
+        return http.csrf(csrfConfig -> csrfConfig.disable()) //not recommended for prod because less secure
+                .cors(corsConfig -> corsConfig.configurationSource(corsConfigurationSource()))
+                .authorizeHttpRequests((requests) -> {
+                    publicPaths.forEach(path ->
+                            requests.requestMatchers(path).permitAll());
+                    requests.anyRequest().authenticated();
+                })
                 .formLogin(withDefaults())
                 .httpBasic(withDefaults()).build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 
 }
