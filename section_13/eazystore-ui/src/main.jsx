@@ -21,6 +21,7 @@ import { productsLoader } from "./components/Home.jsx";
 import { contactAction } from "./components/Contact.jsx";
 import ProductDetail from "./components/ProductDetail.jsx";
 import { CartProvider } from "./store/cart-context.jsx";
+import { AuthProvider } from "./store/auth-context.jsx";
 
 //efficient writing for router
 const routeDefinitions = createRoutesFromElements(
@@ -40,9 +41,11 @@ const appRouter = createBrowserRouter(routeDefinitions);
 createRoot(document.getElementById("root")).render(
   //StrictMode is used to render component twice to find common bugs. Used for development only
   <StrictMode>
-    <CartProvider>
-      <RouterProvider router={appRouter} />
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <RouterProvider router={appRouter} />
+      </CartProvider>
+    </AuthProvider>
     <ToastContainer
       position="top-center"
       autoClose={3000}
