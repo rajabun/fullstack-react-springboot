@@ -4,6 +4,9 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -76,6 +79,21 @@ public class EazyStoreSecurityConfig {
 
         var memoryUserDetailManager = new InMemoryUserDetailsManager(user1, user2);
         return memoryUserDetailManager;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(
+        UserDetailsService userDetailsService,
+        PasswordEncoder passwordEncoder) {
+        /* Deprecated
+         var daoAuthenticationManager = new DaoAuthenticationProvider();
+         daoAuthenticationManager.setUserDetailsService(userDetailsService);
+        */
+
+         var daoAuthenticationManager = new DaoAuthenticationProvider(userDetailsService);
+         daoAuthenticationManager.setPasswordEncoder(passwordEncoder);
+         var providerManager = new ProviderManager(daoAuthenticationManager);
+         return providerManager;
     }
 
     @Bean

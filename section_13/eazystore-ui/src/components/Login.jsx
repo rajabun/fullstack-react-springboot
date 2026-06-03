@@ -63,7 +63,7 @@ export default function Login() {
               placeholder="Your Password"
               autoComplete="current-password"
               required
-              minLength={8}
+              minLength={4}
               maxLength={20}
               className={textFieldStyle}
             />
