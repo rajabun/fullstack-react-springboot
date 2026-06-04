@@ -1,4 +1,4 @@
-import React, { act, useEffect } from "react";
+import React, { useEffect } from "react";
 import PageTitle from "./PageTitle";
 import {
   Link,
@@ -9,15 +9,18 @@ import {
 } from "react-router-dom";
 import apiClient from "../api/apiClient";
 import { toast } from "react-toastify";
+import { useAuth } from "../store/auth-context";
 
 export default function Login() {
   const actionData = useActionData();
   const navigation = useNavigation();
   const navigate = useNavigate();
   const isSubmitting = navigation.state === "submitting";
+  const { loginSuccess } = useAuth();
 
   useEffect(() => {
     if (actionData?.success) {
+      loginSuccess(actionData.jwtToken, actionData.user);
       navigate("/home");
     } else if (actionData?.errors) {
       toast.error(actionData.errors.message || "Login failed");
