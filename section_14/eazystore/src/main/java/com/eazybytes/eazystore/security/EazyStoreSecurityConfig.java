@@ -61,17 +61,16 @@ public class EazyStoreSecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-    
+
     @Bean
     public AuthenticationManager authenticationManager(
-        UserDetailsService userDetailsService,
         PasswordEncoder passwordEncoder) {
         /* Deprecated
          var daoAuthenticationManager = new DaoAuthenticationProvider();
          daoAuthenticationManager.setUserDetailsService(userDetailsService);
         */
 
-         var daoAuthenticationManager = new DaoAuthenticationProvider(userDetailsService);
+         var daoAuthenticationManager = new DaoAuthenticationProvider();
          daoAuthenticationManager.setPasswordEncoder(passwordEncoder);
          var providerManager = new ProviderManager(daoAuthenticationManager);
          return providerManager;
