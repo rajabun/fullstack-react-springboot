@@ -43,7 +43,7 @@ public class EazyStoreUsernamePwdAuthenticationProvider implements Authenticatio
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return false;
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
 }
