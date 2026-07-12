@@ -53,8 +53,8 @@ public class AuthController {
             Authentication authentication = authenticationManager.authenticate(userNamePasswordAuth);
 
             var userDto = new UserDto();
-            var loggedInUser = (User) authentication.getPrincipal();
-            userDto.setName(loggedInUser.getUsername());
+            var loggedInUser = (Customer) authentication.getPrincipal();
+            BeanUtils.copyProperties(loggedInUser, userDto);
 
             String jwtToken = jwtUtil.generateJwtToken(authentication);
 
