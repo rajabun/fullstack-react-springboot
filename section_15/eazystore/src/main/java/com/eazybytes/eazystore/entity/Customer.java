@@ -1,5 +1,8 @@
 package com.eazybytes.eazystore.entity;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -36,7 +39,10 @@ public class Customer extends BaseEntity {
     @Column(name = "password_hash", nullable = false, length = 500)
     private String passwordHash;
 
-    @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
     private Address address;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Set<Role> roles = new LinkedHashSet<>();
 }
