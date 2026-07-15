@@ -38,7 +38,7 @@ public class JwtUtil {
                 .claim("mobileNumber", fetchedCustomer.getMobileNumber())
                 .claim("roles", roles)
                 .issuedAt(new java.util.Date())
-                .expiration(new java.util.Date((new java.util.Date()).getTime() + 60 * 60 * 1000))
+                .expiration(new java.util.Date((new java.util.Date()).getTime() + 24 * 60 * 60 * 1000)) //1 day expiration
                 .signWith(secretKey).compact();
         return jwt;
     }

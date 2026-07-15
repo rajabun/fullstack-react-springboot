@@ -18,12 +18,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.eazybytes.eazystore.constants.ApplicationConstants;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.List;
 
 import javax.crypto.SecretKey;
@@ -59,8 +59,12 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
                     }
                 }
 
+            } catch(ExpiredJwtException expiredJwtException) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("Token Expired!");
+                return;
             } catch (Exception exception) {
-                throw new BadCredentialsException("Invalid Token received!");
+                throw new BadCredentialsException("Invalid Token received!", exception);
             }
         }
         filterChain.doFilter(request, response);
