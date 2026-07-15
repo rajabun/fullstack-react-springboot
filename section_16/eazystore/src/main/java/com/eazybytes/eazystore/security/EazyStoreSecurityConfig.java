@@ -39,7 +39,7 @@ public class EazyStoreSecurityConfig {
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(csrfConfig -> csrfConfig.disable()) //not recommended for prod because less secure
+        return http.csrf(csrfConfig -> csrfConfig.ignoringRequestMatchers("/api/v1/auth/login")) //not recommended for prod because less secure
                 .cors(corsConfig -> corsConfig.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests((requests) -> {
                     publicPaths.forEach(path ->
