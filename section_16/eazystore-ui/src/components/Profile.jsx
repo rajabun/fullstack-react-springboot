@@ -29,7 +29,7 @@ export default function Profile() {
         sessionStorage.setItem("skipRedirectPath", "true");
         logout();
         toast.success(
-          "Logged out successfully! Login again with updated email"
+          "Logged out successfully! Login again with updated email",
         );
         navigate("/login");
       } else {
@@ -110,8 +110,8 @@ export default function Profile() {
               name="mobileNumber"
               type="tel"
               required
-              pattern="^\d{10}$"
-              title="Mobile number must be exactly 10 digits"
+              pattern="^\d{12}$"
+              title="Mobile number must be exactly 12 digits"
               value={profileData.mobileNumber}
               onChange={(e) =>
                 setProfileData((prev) => ({
@@ -298,7 +298,7 @@ export async function profileLoader() {
       error.response?.data?.errorMessage ||
         error.message ||
         "Failed to fetch profile details. Please try again.",
-      { status: error.status || 500 }
+      { status: error.status || 500 },
     );
   }
 }
@@ -327,7 +327,7 @@ export async function profileAction({ request }) {
       error.response?.data?.errorMessage ||
         error.message ||
         "Failed to save profile details. Please try again.",
-      { status: error.status || 500 }
+      { status: error.status || 500 },
     );
   }
 }

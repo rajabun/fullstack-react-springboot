@@ -117,8 +117,8 @@ export default function Register() {
                 name="mobileNumber"
                 placeholder="Your Mobile Number"
                 required
-                pattern="^\d{10}$"
-                title="Mobile number must be exactly 10 digits"
+                pattern="^\d{12}$"
+                title="Mobile number must be exactly 12 digits"
                 className={textFieldStyle}
               />
               {actionData?.errors?.mobileNumber && (
