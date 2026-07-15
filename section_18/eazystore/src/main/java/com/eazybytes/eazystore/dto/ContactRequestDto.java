@@ -20,7 +20,7 @@ public class ContactRequestDto {
     private String email;
 
     @NotBlank(message = "Mobile Number cannot be empty")
-    @Pattern(regexp = "^\\d{10}$", message = "Mobile number must be 10 digits")
+    @Pattern(regexp = "^\\d{12}$", message = "Mobile number must be 12 digits")
     private String mobileNumber;
 
     @NotBlank(message = "Message cannot be empty")
