@@ -27,7 +27,7 @@ import Profile, {
   profileLoader,
   profileAction,
 } from "./components/Profile.jsx";
-import Orders from "./components/Orders.jsx";
+import Orders, { ordersLoader } from "./components/Orders.jsx";
 import AdminOrders from "./components/admin/AdminOrders.jsx";
 import Messages from "./components/admin/Messages.jsx";
 import Register, { registerAction } from "./components/Register.jsx";
@@ -61,7 +61,7 @@ const routeDefinitions = createRoutesFromElements(
           return !actionResult?.success;
         }}
       />
-      <Route path="/orders" element={<Orders />} />
+      <Route path="/orders" element={<Orders />} loader={ordersLoader} />
       <Route path="/admin/orders" element={<AdminOrders />} />
       <Route path="/admin/messages" element={<Messages />} />
     </Route>
