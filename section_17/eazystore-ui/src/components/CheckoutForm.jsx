@@ -112,8 +112,7 @@ export default function CheckoutForm() {
         setErrorMessage(error.message || "Payment failed. Please try again.");
       } else if (paymentIntent && paymentIntent.status === "succeeded") {
         toast.success("Payment successful!");
-        navigate("/order-success");
-        /*try {
+        try {
           await apiClient.post("/orders", {
             totalPrice: totalPrice,
             paymentId: paymentIntent.id,
@@ -130,7 +129,7 @@ export default function CheckoutForm() {
         } catch (orderError) {
           console.error("Failed to create order:", orderError);
           setErrorMessage("Order creation failed. Please contact support.");
-        }*/
+        }
       }
     } catch (error) {
       setErrorMessage("Error processing payment. Please try again later.");
