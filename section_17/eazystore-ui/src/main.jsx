@@ -33,7 +33,9 @@ import Register, { registerAction } from "./components/Register.jsx";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(
+  "pk_test_51TtJmAR03Sk1d0sXXBs0Q4AFLgWdsYBP9Cr63wXubj389hT1xTLnCCXfMUBcuipCJU1nC1YvoMHZZ8XGrtAfQsA500ZdTkrkQS",
+);
 
 //efficient writing for router
 const routeDefinitions = createRoutesFromElements(

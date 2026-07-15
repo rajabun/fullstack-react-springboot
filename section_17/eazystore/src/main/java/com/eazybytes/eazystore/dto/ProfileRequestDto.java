@@ -19,7 +19,7 @@ public class ProfileRequestDto {
     private String email;
 
     @NotBlank(message = "Mobile Number cannot be empty")
-    @Pattern(regexp = "^\\d{10}$", message = "Mobile number must be 10 digits")
+    @Pattern(regexp = "^\\d{12}$", message = "Mobile number must be 12 digits")
     private String mobileNumber;
 
     @NotBlank(message = "Street is required")
@@ -39,7 +39,7 @@ public class ProfileRequestDto {
     private String postalCode;
 
     @NotBlank(message = "Country is required")
-    @Size(min = 3, max = 30, message = "The length of the country should be between 3 and 30 characters")
+    @Size(min = 2, max = 2, message = "The length of the country should be exactly 2 characters")
     private String country;
 
 }
