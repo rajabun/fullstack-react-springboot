@@ -30,6 +30,10 @@ import Orders from "./components/Orders.jsx";
 import AdminOrders from "./components/admin/AdminOrders.jsx";
 import Messages from "./components/admin/Messages.jsx";
 import Register, { registerAction } from "./components/Register.jsx";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLISHABLE_KEY);
 
 //efficient writing for router
 const routeDefinitions = createRoutesFromElements(
@@ -65,20 +69,22 @@ const appRouter = createBrowserRouter(routeDefinitions);
 createRoot(document.getElementById("root")).render(
   //StrictMode is used to render component twice to find common bugs. Used for development only
   <StrictMode>
-    <AuthProvider>
-      <CartProvider>
-        <RouterProvider router={appRouter} />
-      </CartProvider>
-    </AuthProvider>
-    <ToastContainer
-      position="top-center"
-      autoClose={3000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      draggable
-      pauseOnHover
-      theme={localStorage.getItem("theme") === "dark" ? "dark" : "light"}
-      transition={Bounce}
-    />
+    <Elements stripe={stripePromise}>
+      <AuthProvider>
+        <CartProvider>
+          <RouterProvider router={appRouter} />
+        </CartProvider>
+      </AuthProvider>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        draggable
+        pauseOnHover
+        theme={localStorage.getItem("theme") === "dark" ? "dark" : "light"}
+        transition={Bounce}
+      />
+    </Elements>
   </StrictMode>,
 );
