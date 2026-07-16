@@ -22,7 +22,6 @@ import Login, { loginAction } from "./components/Login.jsx";
 import Cart from "./components/Cart.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import ProductDetail from "./components/ProductDetail.jsx";
-import { AuthProvider } from "./store/auth-context.jsx";
 import CheckoutForm from "./components/CheckoutForm.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Profile, {
@@ -93,11 +92,9 @@ createRoot(document.getElementById("root")).render(
   //StrictMode is used to render component twice to find common bugs. Used for development only
   <StrictMode>
     <Elements stripe={stripePromise}>
-      <AuthProvider>
-        <Provider store={store}>
-          <RouterProvider router={appRouter} />
-        </Provider>
-      </AuthProvider>
+      <Provider store={store}>
+        <RouterProvider router={appRouter} />
+      </Provider>
       <ToastContainer
         position="top-center"
         autoClose={3000}

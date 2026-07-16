@@ -1,4 +1,4 @@
-/* eslint-disable react-refresh/only-export-components */
+/*
 import { createContext, useEffect, useContext, useReducer } from "react";
 
 //STEP 1
@@ -91,3 +91,4 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+*/

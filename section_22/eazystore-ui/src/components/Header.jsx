@@ -8,9 +8,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectTotalQuantity } from "../store/cart-slice";
-import { useAuth } from "../store/auth-context";
+import { selectIsAuthenticated, selectUser, logout } from "../store/auth-slice";
 import { toast } from "react-toastify";
 
 // const Header = () => {
@@ -29,7 +29,9 @@ export default function Header() {
   const toggleUserMenu = () => setUserMenuOpen((prev) => !prev);
 
   const totalQuantity = useSelector(selectTotalQuantity);
-  const { isAuthenticated, user, logout } = useAuth();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const user = useSelector(selectUser);
   const isAdmin = user?.roles?.includes("ROLE_ADMIN");
 
   useEffect(() => {
@@ -59,7 +61,7 @@ export default function Header() {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    logout();
+    dispatch(logout());
     toast.success("Logged out successfully!");
     navigate("/home");
   };
