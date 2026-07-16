@@ -3,6 +3,7 @@ package com.eazybytes.eazystore.security;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,7 @@ import com.eazybytes.eazystore.repository.CustomerRepository;
 
 import lombok.RequiredArgsConstructor;
 
+@Profile("prod") // Include this provider only in the 'prod' profile
 @Component
 @RequiredArgsConstructor
 public class EazyStoreUsernamePwdAuthenticationProvider implements AuthenticationProvider {
