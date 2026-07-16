@@ -14,7 +14,10 @@ import {
   Route,
 } from "react-router-dom";
 import About from "./components/About.jsx";
-import Contact, { contactAction } from "./components/Contact.jsx";
+import Contact, {
+  contactAction,
+  contactLoader,
+} from "./components/Contact.jsx";
 import Login, { loginAction } from "./components/Login.jsx";
 import Cart from "./components/Cart.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
@@ -46,7 +49,12 @@ const routeDefinitions = createRoutesFromElements(
     <Route index element={<Home />} loader={productsLoader} />
     <Route path="/home" element={<Home />} loader={productsLoader} />
     <Route path="/about" element={<About />} />
-    <Route path="/contact" element={<Contact />} action={contactAction} />
+    <Route
+      path="/contact"
+      element={<Contact />}
+      action={contactAction}
+      loader={contactLoader}
+    />
     <Route path="/login" element={<Login />} action={loginAction} />
     <Route path="/register" element={<Register />} action={registerAction} />
     <Route path="/cart" element={<Cart />} />

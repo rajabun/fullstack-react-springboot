@@ -1,5 +1,6 @@
 package com.eazybytes.eazystore.controller;
 
+import com.eazybytes.eazystore.dto.ContactInfoDto;
 import com.eazybytes.eazystore.dto.ContactRequestDto;
 import com.eazybytes.eazystore.service.IContactService;
 
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("api/v1/contacts")
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContactController {
 
     private final IContactService iContactService;
+    private final ContactInfoDto contactInfoDto;
     
     @PostMapping
     public ResponseEntity<String> saveContact(@Valid @RequestBody ContactRequestDto contactRequestDto) { //DTO Pattern
@@ -26,4 +30,9 @@ public class ContactController {
         // throw new RuntimeException("Oops something bad happened"); //testing global exception handler
         return ResponseEntity.status(HttpStatus.CREATED).body("Request processed successfully");
     }
+
+    @GetMapping
+    public ResponseEntity<ContactInfoDto> getContactInfo() {
+        return ResponseEntity.ok(contactInfoDto);
+    }    
 }
