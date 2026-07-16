@@ -1,13 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   faArrowLeft,
   faShoppingCart,
   faShoppingBasket,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cart-slice";
 
