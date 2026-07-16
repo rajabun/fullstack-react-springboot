@@ -22,7 +22,6 @@ import Login, { loginAction } from "./components/Login.jsx";
 import Cart from "./components/Cart.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import ProductDetail from "./components/ProductDetail.jsx";
-import { CartProvider } from "./store/cart-context.jsx";
 import { AuthProvider } from "./store/auth-context.jsx";
 import CheckoutForm from "./components/CheckoutForm.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
@@ -38,6 +37,8 @@ import Messages, { messagesLoader } from "./components/admin/Messages.jsx";
 import Register, { registerAction } from "./components/Register.jsx";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import store from "./store/store.js";
+import { Provider } from "react-redux";
 
 const stripePromise = loadStripe(
   "pk_test_51TtJmAR03Sk1d0sXXBs0Q4AFLgWdsYBP9Cr63wXubj389hT1xTLnCCXfMUBcuipCJU1nC1YvoMHZZ8XGrtAfQsA500ZdTkrkQS",
@@ -93,9 +94,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Elements stripe={stripePromise}>
       <AuthProvider>
-        <CartProvider>
+        <Provider store={store}>
           <RouterProvider router={appRouter} />
-        </CartProvider>
+        </Provider>
       </AuthProvider>
       <ToastContainer
         position="top-center"
