@@ -1,6 +1,6 @@
+/*
 import { createContext, useEffect, useContext, useReducer } from "react";
 
-/*
 const initialCartContext = {
   cart: [],
   setCart: () => {},
@@ -10,7 +10,6 @@ const initialCartContext = {
   removeFromCart: () => {},
   totalQuantity: 0,
 };
-*/
 
 //STEP 1
 // eslint-disable-next-line react-refresh/only-export-components
@@ -81,7 +80,6 @@ export const CartProvider = ({ children }) => {
       return [];
     }
   });
-  */
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
@@ -119,7 +117,6 @@ export const CartProvider = ({ children }) => {
       prevCart.filter((item) => item.productId !== productId),
     );
   };
-  */
 
   const addToCart = (product, quantity) => {
     dispatch({ type: ADD_TO_CART, payload: { product, quantity } });
@@ -158,3 +155,4 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
+*/
